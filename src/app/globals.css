@@ -8,7 +8,7 @@
 body {
     width: 100vh;
     height: 100vh;
-    overflow: hidden;
+    overflow-x: hidden;
     background-image: url(../../public/bg.jpg);
     background-position: center;
     background-repeat: no-repeat;
