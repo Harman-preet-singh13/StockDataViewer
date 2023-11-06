@@ -63,6 +63,7 @@ const StockData = () => {
   <div className="symbol-btn-container">
   <Link
     href="/"
+    className="text-green-600 hover:text-orange-400"
     >
       Home
     </Link>
@@ -71,7 +72,7 @@ const StockData = () => {
           <Link
           href={symbol}
           key={index}
-          className=""
+          className="text-green-600 hover:text-orange-400"
           onClick={()=> setSymbol(symbol)}
           >
             {symbol}

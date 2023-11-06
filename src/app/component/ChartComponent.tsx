@@ -14,18 +14,18 @@ const ChartComponent: FC<ChartComponentProps> = ({ stockData, symbol }) => {
 
   const chartRef = useRef<IChartApi | null>(null);
 
-  const resizeChart = () => {
-    const chartContainer = document.getElementById('chart-container');
-    if (chartContainer) {
-      const width = chartContainer.clientWidth;
-      const height = chartContainer.clientHeight;
+
+  const resizeObserver = new ResizeObserver((entries)=>{
+    for(const entry of entries) {
+      const width = entry.contentRect.width;
+      const height = entry.contentRect.height;
 
       setChartDimensions({
         width,
         height,
       });
     }
-  };
+  });
 
   const currentLocale = window.navigator.languages[0];
 
@@ -34,13 +34,22 @@ const ChartComponent: FC<ChartComponentProps> = ({ stockData, symbol }) => {
     currency: 'USD',
 }).format;
 
-  useEffect(() => {
-    window.addEventListener('resize', resizeChart);
+useEffect(() => {
+  const chartContainer = document.getElementById('chart-container');
 
-    return () => {
-      window.removeEventListener('resize', resizeChart);
-    };
-  }, []);
+console.log(chartDimensions);
+
+  if (chartContainer) {
+    resizeObserver.observe(chartContainer);
+  }
+
+  return () => {
+    if (chartContainer) {
+      resizeObserver.unobserve(chartContainer);
+    }
+  };
+
+}, []);
 
   useEffect(() => {
     const chartContainer = document.getElementById('chart-container');
@@ -98,7 +107,12 @@ chart.applyOptions({
 
   }, [chartDimensions, stockData]);
 
-  return <div className="w-screen h-full mb-5" id="chart-container" />;
+ 
+
+  return <div 
+  className="w-screen h-full mb-5 cursor-grab"
+  id="chart-container"
+  />;
 };
 
 export default ChartComponent;
