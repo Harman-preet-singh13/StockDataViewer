@@ -61,6 +61,11 @@ const StockData = () => {
   return (
   <>
   <div className="symbol-btn-container">
+  <Link
+    href="/"
+    >
+      Home
+    </Link>
   {symbols.map((symbol, index)=>{
         return(
           <Link
