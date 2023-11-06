@@ -1,3 +1,5 @@
+[Live](https://main--steady-gaufre-4276ea.netlify.app/)
+
 Project Name: StockDataViewer
 
 Description:
